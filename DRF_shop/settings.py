@@ -71,6 +71,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+if DEBUG:
+    MIDDLEWARE += ['middleware.StackOverflowMiddleware', ]
+
 ROOT_URLCONF = 'DRF_shop.urls'
 
 TEMPLATES = [
