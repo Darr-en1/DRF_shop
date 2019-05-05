@@ -6,12 +6,12 @@ import os
 
 pwd = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(pwd+"../")
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "VUE_DRF_Shop.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "DRF_shop.settings")
 
 import django
 django.setup()
 
-from goods import Goods, GoodsCategory, GoodsImage
+from goods.models import Goods, GoodsCategory, GoodsImage
 
 from db_tools.data.product_data import row_data
 

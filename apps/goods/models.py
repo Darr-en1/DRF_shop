@@ -1,4 +1,4 @@
-from datetime import datetime
+from django.utils import timezone
 
 from django.db import models
 from DjangoUeditor.models import UEditorField
@@ -22,7 +22,7 @@ class GoodsCategory(models.Model):
     parent_category = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, verbose_name="父类目级别", help_text="父目录",
                                         related_name="sub_cat")
     is_tab = models.BooleanField(default=False, verbose_name="是否导航", help_text="是否导航")
-    add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
+    add_time = models.DateTimeField(default=timezone.now, verbose_name="添加时间")
 
     class Meta:
         verbose_name = "商品类别"
@@ -40,7 +40,7 @@ class GoodsCategoryBrand(models.Model):
     name = models.CharField(default="", max_length=30, verbose_name="品牌名", help_text="品牌名")
     desc = models.TextField(default="", max_length=200, verbose_name="品牌描述", help_text="品牌描述")
     image = models.ImageField(max_length=200, upload_to="brands/")
-    add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
+    add_time = models.DateTimeField(default=timezone.now, verbose_name="添加时间")
 
     class Meta:
         verbose_name = "品牌"
@@ -71,7 +71,7 @@ class Goods(models.Model):
     goods_front_image = models.ImageField(upload_to="goods/images/", null=True, blank=True, verbose_name="封面图")
     is_new = models.BooleanField(default=False, verbose_name="是否新品")
     is_hot = models.BooleanField(default=False, verbose_name="是否热销")
-    add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
+    add_time = models.DateTimeField(default=timezone.now, verbose_name="添加时间")
 
     class Meta:
         verbose_name = '商品'
@@ -83,7 +83,7 @@ class Goods(models.Model):
 
 class IndexAd(models.Model):
     category = models.ForeignKey(GoodsCategory, on_delete=models.CASCADE, related_name='category',verbose_name="商品类目")
-    goods =models.ForeignKey(Goods, on_delete=models.CASCADE, related_name='goods')
+    goods = models.ForeignKey(Goods, on_delete=models.CASCADE, related_name='goods')
 
     class Meta:
         verbose_name = '首页商品类别广告'
@@ -99,7 +99,7 @@ class GoodsImage(models.Model):
     """
     goods = models.ForeignKey(Goods, on_delete=models.CASCADE, verbose_name="商品", related_name="images")
     image = models.ImageField(upload_to="", verbose_name="图片", null=True, blank=True)
-    add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
+    add_time = models.DateTimeField(default=timezone.now, verbose_name="添加时间")
 
     class Meta:
         verbose_name = '商品图片'
@@ -116,7 +116,7 @@ class Banner(models.Model):
     goods = models.ForeignKey(Goods, on_delete=models.CASCADE, verbose_name="商品")
     image = models.ImageField(upload_to='banner', verbose_name="轮播图片")
     index = models.IntegerField(default=0, verbose_name="轮播顺序")
-    add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
+    add_time = models.DateTimeField(default=timezone.now, verbose_name="添加时间")
 
     class Meta:
         verbose_name = '轮播商品'
@@ -132,7 +132,7 @@ class HotSearchWords(models.Model):
     """
     keywords = models.CharField(default="", max_length=20, verbose_name="热搜词")
     index = models.IntegerField(default=0, verbose_name="排序")
-    add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
+    add_time = models.DateTimeField(default=timezone.now, verbose_name="添加时间")
 
     class Meta:
         verbose_name = '热搜词'

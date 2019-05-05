@@ -10,13 +10,13 @@ pwd = os.path.dirname(os.path.realpath(__file__))
 # 将项目目录加入setting
 sys.path.append(pwd + "../")
 # manage.py中
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "VUE_DRF_Shop.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "DRF_shop.settings")
 
 import django
 django.setup()
 
 # 这行代码必须在初始化django之后
-from goods import GoodsCategory
+from goods.models import GoodsCategory
 
 from db_tools.data.category_data import row_data
 

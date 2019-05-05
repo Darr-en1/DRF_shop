@@ -1,10 +1,12 @@
-from datetime import datetime
-
-from django.db import models
 from django.contrib.auth import get_user_model
+from django.db import models
+from django.utils import timezone
 
 from goods.models import Goods
+
 User = get_user_model()
+
+
 # Create your models here.
 
 
@@ -16,7 +18,7 @@ class ShoppingCart(models.Model):
     goods = models.ForeignKey(Goods, on_delete=models.CASCADE, verbose_name=u"商品")
     nums = models.IntegerField(default=0, verbose_name="购买数量")
 
-    add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
+    add_time = models.DateTimeField(default=timezone.now, verbose_name=u"添加时间")
 
     class Meta:
         verbose_name = '购物车'
@@ -52,7 +54,7 @@ class OrderInfo(models.Model):
     signer_name = models.CharField(max_length=20, default="", verbose_name="签收人")
     singer_mobile = models.CharField(max_length=11, verbose_name="联系电话")
 
-    add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
+    add_time = models.DateTimeField(default=timezone.now, verbose_name="添加时间")
 
     class Meta:
         verbose_name = u"订单"
@@ -60,6 +62,7 @@ class OrderInfo(models.Model):
 
     def __str__(self):
         return str(self.order_sn)
+
 
 class OrderGoods(models.Model):
     """
@@ -71,7 +74,7 @@ class OrderGoods(models.Model):
     goods = models.ForeignKey(Goods, on_delete=models.CASCADE, verbose_name="商品")
     goods_num = models.IntegerField(default=0, verbose_name="商品数量")
 
-    add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
+    add_time = models.DateTimeField(default=timezone.now, verbose_name="添加时间")
 
     class Meta:
         verbose_name = "订单商品"
