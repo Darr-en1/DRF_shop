@@ -41,7 +41,7 @@ class VerifyCode(models.Model):
     add_time = models.DateTimeField(default=timezone.now, verbose_name="添加时间")
 
     class Meta:
-        verbose_name = "用户"
+        verbose_name = "验证码"
         verbose_name_plural = verbose_name
 
     def __str__(self):
