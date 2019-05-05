@@ -32,7 +32,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 AUTH_USER_MODEL = 'users.UserProfile'
 
 # Application definition
@@ -95,7 +94,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'DRF_shop.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -128,7 +126,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -142,7 +139,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
@@ -151,3 +147,10 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# 通过 python manage.py flush 清空数据 在Django1.5 后reset被flush取代
+# python manage.py dumpdata --format=json > fixtures/initial_data.json 将数据库数据导出到json文件
+# https://www.chenshaowen.com/blog/django-initializes-fixture-of-data.html
+FIXTURE_DIRS = (
+    os.path.join(BASE_DIR, 'fixtures'),
+)
