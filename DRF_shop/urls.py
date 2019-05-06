@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.authtoken import views
 from rest_framework.documentation import include_docs_urls
 from rest_framework.routers import DefaultRouter
 
@@ -33,7 +34,12 @@ router.register(r'good_nest_category', GoodCategoryNestViewSet, base_name='good_
 urlpatterns = [
                   path('admin/', admin.site.urls),
 
+                  # drf自带的Token
+                  path(r'api-token-auth/', views.obtain_auth_token),
+
                   path('', include(router.urls)),
+
+                  path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
                   path('docs/', include_docs_urls(title='VUE_DRF_Shop')),
 

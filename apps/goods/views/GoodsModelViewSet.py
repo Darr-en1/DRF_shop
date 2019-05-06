@@ -3,7 +3,6 @@ from rest_framework import viewsets, filters
 
 from goods.filters import GoodsListFilter
 from goods.models import Goods
-from goods.pagination import GoodsPagination
 from goods.serializers.GoodsModelSerializer import GoodsModelSerializer
 
 
