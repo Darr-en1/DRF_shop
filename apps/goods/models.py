@@ -2,6 +2,8 @@ from django.utils import timezone
 
 from django.db import models
 from DjangoUeditor.models import UEditorField
+
+
 # Create your models here.
 
 
@@ -19,8 +21,9 @@ class GoodsCategory(models.Model):
     code = models.CharField(default="", max_length=30, verbose_name="类别code", help_text="类别code")
     desc = models.TextField(default="", verbose_name="类别描述", help_text="类别描述")
     category_type = models.IntegerField(choices=CATEGORY_TYPE, verbose_name="类目级别", help_text="类目级别")
-    parent_category = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, verbose_name="父类目级别", help_text="父目录",
-                                        related_name="sub_cat")
+    parent_category = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, verbose_name="父类目级别",
+                                        help_text="父目录",
+                                        related_name="sub_cat")  # 表关联自己通过self
     is_tab = models.BooleanField(default=False, verbose_name="是否导航", help_text="是否导航")
     add_time = models.DateTimeField(default=timezone.now, verbose_name="添加时间")
 
@@ -36,7 +39,8 @@ class GoodsCategoryBrand(models.Model):
     """
     品牌名
     """
-    category = models.ForeignKey(GoodsCategory, on_delete=models.CASCADE, related_name='brands', null=True, blank=True, verbose_name="商品类目")
+    category = models.ForeignKey(GoodsCategory, on_delete=models.CASCADE, related_name='brands', null=True, blank=True,
+                                 verbose_name="商品类目")
     name = models.CharField(default="", max_length=30, verbose_name="品牌名", help_text="品牌名")
     desc = models.TextField(default="", max_length=200, verbose_name="品牌描述", help_text="品牌描述")
     image = models.ImageField(max_length=200, upload_to="brands/")
@@ -82,7 +86,7 @@ class Goods(models.Model):
 
 
 class IndexAd(models.Model):
-    category = models.ForeignKey(GoodsCategory, on_delete=models.CASCADE, related_name='category',verbose_name="商品类目")
+    category = models.ForeignKey(GoodsCategory, on_delete=models.CASCADE, related_name='category', verbose_name="商品类目")
     goods = models.ForeignKey(Goods, on_delete=models.CASCADE, related_name='goods')
 
     class Meta:
