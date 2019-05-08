@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
-
+import datetime
 import os
 import sys
 
@@ -17,7 +17,7 @@ import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-sys.path.insert(0, BASE_DIR)
+# sys.path.insert(0, BASE_DIR)
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 
@@ -33,6 +33,12 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'users.UserProfile'
+
+
+# 自定义后端登陆验证
+# AUTHENTICATION_BACKENDS = (
+#     'apps.users.views.CustomBackend.CustomBackend',
+# )
 
 # Application definition
 
@@ -157,9 +163,24 @@ FIXTURE_DIRS = (
 )
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (  # 全局配置 可以在在单个view中设置   authentication_classes = (TokenAuthentication,)
-        'rest_framework.authentication.TokenAuthentication',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 全局配置 可以在在单个view中设置   authentication_classes = (TokenAuthentication,)
+        # 'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     )
 }
+JWT_AUTH = {
+    # 过期时间
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+    # 头信息类型
+    'JWT_AUTH_HEADER_PREFIX': 'JWT',
+}
+
+
+
+
+
+# 手机号码正则表达式
+REGEX_MOBILE = "^1[358]\d{9}$|^147\d{8}$|^176\d{8}$"

@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
 
-from goods.models import Goods
+from apps.goods.models import Goods
 
 User = get_user_model()
 

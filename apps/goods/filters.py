@@ -1,4 +1,4 @@
-from goods.models import Goods
+from apps.goods.models import Goods
 
 __author__ = 'Darr_en1'
 

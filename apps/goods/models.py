@@ -1,7 +1,7 @@
 from django.utils import timezone
 
 from django.db import models
-from DjangoUeditor.models import UEditorField
+from extra_apps.DjangoUeditor.models import UEditorField
 
 
 # Create your models here.

@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from goods.models import Goods, GoodsCategory, GoodsCategoryBrand, GoodsImage, IndexAd, Banner, HotSearchWords
+from apps.goods.models import Goods, GoodsCategory, GoodsCategoryBrand, GoodsImage, IndexAd, Banner, HotSearchWords
 
 admin.site.register(Goods)
 admin.site.register(GoodsCategory)

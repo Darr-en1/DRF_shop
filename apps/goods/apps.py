@@ -2,4 +2,7 @@ from django.apps import AppConfig
 
 
 class GoodsConfig(AppConfig):
-    name = 'goods'
+    name = 'apps.goods'
+
+    def ready(self):
+        import apps.goods.signals.good_handle
