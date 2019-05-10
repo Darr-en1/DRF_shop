@@ -1,6 +1,11 @@
-from rest_framework import mixins, viewsets
+from rest_framework import mixins, viewsets, status
+from rest_framework.response import Response
+# from rest_framework_jwt.serializers import jwt_encode_handler, jwt_payload_handler
 
-from apps.users.serializers.UserRegModelSerializer import UserRegModelSerializer
+# from rest_framework_jwt.utils import jwt_payload_handler
+from rest_framework_jwt.utils import jwt_encode_handler, jwt_payload_handler
+
+from users.serializers.UserRegModelSerializer import UserRegModelSerializer
 
 
 class UserViewSet(mixins.CreateModelMixin,
@@ -33,31 +38,31 @@ class UserViewSet(mixins.CreateModelMixin,
     #         return []
     #     return []
     #
-    # def create(self, request, *args, **kwargs):
-    #     '''
-    #     注册完成之后登陆
-    #     获取JWT  token 设置到api中
-    #     '''
-    #     serializer = self.get_serializer(data=request.data)
-    #     serializer.is_valid(raise_exception=True)
-    #
-    #     # 获取当前创建的User对象
-    #     user = self.perform_create(serializer)
-    #     # api返回的数据
-    #     re_dict = serializer.data
-    #     payload = jwt_payload_handler(user)
-    #     re_dict["token"] = jwt_encode_handler(payload)
-    #     re_dict["name"] = user.name if user.name else user.username
-    #
-    #     headers = self.get_success_headers(serializer.data)
-    #     return Response(re_dict, status=status.HTTP_201_CREATED, headers=headers)
-    #
-    # def perform_create(self, serializer):
-    #     '''
-    #     :param serializer:  User序列化对象
-    #     :return:  返回创建的User对象
-    #     '''
-    #     return serializer.save()
+    def create(self, request, *args, **kwargs):
+        '''
+        注册完成之后登陆
+        获取JWT  token 设置到api中
+        '''
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        # 获取当前创建的User对象
+        user = self.perform_create(serializer)
+        # api返回的数据
+        re_dict = serializer.data
+        payload = jwt_payload_handler(user)
+        re_dict["token"] = jwt_encode_handler(payload)
+        re_dict["name"] = user.name if user.name else user.username
+
+        headers = self.get_success_headers(serializer.data)
+        return Response(re_dict, status=status.HTTP_201_CREATED, headers=headers)
+
+    def perform_create(self, serializer):
+        '''
+        :param serializer:  User序列化对象
+        :return:  返回创建的User对象
+        '''
+        return serializer.save()
     #
     # # 返回当前用户
     # def get_object(self):

@@ -19,8 +19,10 @@ from django.urls import path, include
 from rest_framework.authtoken import views
 from rest_framework.documentation import include_docs_urls
 from rest_framework.routers import DefaultRouter
+from rest_framework.schemas import get_schema_view
 from rest_framework_jwt.views import obtain_jwt_token
 
+import xadmin
 from DRF_shop import settings
 from goods.views.GoodCategoryNestViewSet import GoodCategoryNestViewSet
 from goods.views.GoodCategoryViewSet import GoodCategoryViewSet
@@ -42,7 +44,10 @@ router.register(r'code', SmsCodeViewset, base_name='code')
 router.register(r'users', UserViewSet, base_name='users')
 
 urlpatterns = [
-                  path('admin/', admin.site.urls),
+                  # path('admin/', admin.site.urls),
+
+                  path('xadmin/', xadmin.site.urls),
+                  path('schema/',  get_schema_view(title='DRF_Shop')),
 
                   # drf自带的Token
                   path('api-token-auth/', views.obtain_auth_token),

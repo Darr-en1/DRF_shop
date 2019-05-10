@@ -1,8 +1,8 @@
 from rest_framework import mixins, viewsets, status
 from rest_framework.response import Response
 
-from apps.users.models import VerifyCode
-from apps.users.serializers.SmsSerializer import SmsSerializer
+from users.models import VerifyCode
+from users.serializers.SmsSerializer import SmsSerializer
 
 
 class SmsCodeViewset(mixins.CreateModelMixin,

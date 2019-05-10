@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
-from apps.users.models import VerifyCode
+from users.models import VerifyCode
 
 User = get_user_model()
 
@@ -27,6 +27,15 @@ class UserRegModelSerializer(serializers.ModelSerializer):
 
     password = serializers.CharField(style={'input_type': 'password'},  # 设置为秘文
                                      label="密码", write_only=True)
+
+    # 重载create方法  还可以使用信号量的方法
+    # def create(self, validated_data):
+    #     user = super(UserRegSerializer, self).create(validated_data=validated_data)
+    #     #对密码加密
+    #     user.set_password(validated_data["password"])
+    #     user.save()
+    #     return user
+
 
     def validated_code(self, code):
         # 验证码在数据库中是否存在，用户从前端post过来的值都会放入initial_data里面，排序(最新一条)。

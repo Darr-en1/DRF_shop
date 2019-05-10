@@ -1,7 +1,7 @@
 from rest_framework import viewsets, mixins
 
-from apps.goods.models import GoodsCategory
-from apps.goods.serializers.GoodCategoryNestModelSerializer import GoodCategoryNestModelSerializer
+from goods.models import GoodsCategory
+from goods.serializers.GoodCategoryNestModelSerializer import GoodCategoryNestModelSerializer
 
 
 class GoodCategoryNestViewSet(viewsets.ReadOnlyModelViewSet):

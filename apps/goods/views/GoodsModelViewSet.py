@@ -1,9 +1,9 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, filters
 
-from apps.goods.filters import GoodsListFilter
-from apps.goods.models import Goods
-from apps.goods.serializers.GoodsModelSerializer import GoodsModelSerializer
+from goods.filters import GoodsListFilter
+from goods.models import Goods
+from goods.serializers.GoodsModelSerializer import GoodsModelSerializer
 
 
 class GoodsModelViewSet(viewsets.ModelViewSet):

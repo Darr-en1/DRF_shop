@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
 from DRF_shop.settings import REGEX_MOBILE
-from apps.users.models import VerifyCode
+from users.models import VerifyCode
 
 User = get_user_model()
 

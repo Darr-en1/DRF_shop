@@ -1,8 +1,8 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from apps.goods.models import Goods
-from apps.goods.serializers.GoodsModelSerializer import GoodsModelSerializer
+from goods.models import Goods
+from goods.serializers.GoodsModelSerializer import GoodsModelSerializer
 
 
 class GoodsListApiView(APIView):

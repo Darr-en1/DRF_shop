@@ -36,12 +36,11 @@ AUTH_USER_MODEL = 'users.UserProfile'
 
 
 # 自定义后端登陆验证
-# AUTHENTICATION_BACKENDS = (
-#     'apps.users.views.CustomBackend.CustomBackend',
-# )
+AUTHENTICATION_BACKENDS = (
+    'users.views.CustomBackend.CustomBackend',
+)
 
 # Application definition
-
 INSTALLED_APPS = [
     # sys
     'django.contrib.admin',
@@ -59,12 +58,15 @@ INSTALLED_APPS = [
 
     # third party
     'DjangoUeditor',
+    'crispy_forms',
+    'xadmin',
     'rest_framework',
     'django_filters',
     'corsheaders',
     'rest_framework.authtoken',
     'django_extensions',
 ]
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
