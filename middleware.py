@@ -3,10 +3,10 @@ from django.utils.deprecation import MiddlewareMixin
 
 __author__ = 'Darr_en1'
 
+
 class StackOverflowMiddleware(MiddlewareMixin):
 
-    def process_exception(self,request,exception):
-
+    def process_exception(self, request, exception):
         intitle = f'{exception.__class__.__name__}: {exception.args[0]}'
 
         url = 'https://api.stackexchange.com/2.2/search'
@@ -30,6 +30,3 @@ class StackOverflowMiddleware(MiddlewareMixin):
             print(question['link'])
 
             print('')
-
-
-
