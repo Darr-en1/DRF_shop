@@ -24,10 +24,12 @@ from rest_framework_jwt.views import obtain_jwt_token
 import xadmin
 from DRF_shop import settings
 from apps.users.views.SmsCodeViewSet import SmsCodeViewset
+from goods.views.BannerViewset import BannerViewset
 from goods.views.GoodCategoryNestViewSet import GoodCategoryNestViewSet
 from goods.views.GoodCategoryViewSet import GoodCategoryViewSet
 from goods.views.GoodsApiView import GoodsListApiView
 from goods.views.GoodsModelViewSet import GoodsModelViewSet
+from goods.views.HotSearchsViewset import HotSearchsViewset
 from trade.views.OrderViewset import OrderViewset
 from trade.views.ShoppingCartViewset import ShoppingCartViewset
 from user_operation.views.AddressViewset import AddressViewset
@@ -45,6 +47,10 @@ router.register(r'good_nest_category', GoodCategoryNestViewSet, base_name='good_
 
 router.register(r'code', SmsCodeViewset, base_name='code')
 
+router.register(r'banner', BannerViewset, base_name='banner')
+
+router.register(r'hot_search', HotSearchsViewset, base_name='hot_search')
+
 "==============================apps.user_operation========================================"
 router.register(r'user_fav', UserFavViewSet, base_name='user_fav')
 
@@ -57,7 +63,7 @@ router.register(r'users', UserViewSet, base_name='users')
 "==============================apps.trade========================================"
 router.register(r'shopping_cart', ShoppingCartViewset, base_name='shopping_cart')
 
-router.register(r'order', OrderViewset, base_name='order')
+router.register(r'orders', OrderViewset, base_name='orders')
 urlpatterns = [
 
                   path('xadmin/', xadmin.site.urls),
