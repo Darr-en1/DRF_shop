@@ -14,7 +14,6 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf.urls.static import static
-from django.contrib import admin
 from django.urls import path, include
 from rest_framework.authtoken import views
 from rest_framework.documentation import include_docs_urls
@@ -24,15 +23,20 @@ from rest_framework_jwt.views import obtain_jwt_token
 
 import xadmin
 from DRF_shop import settings
+from apps.users.views.SmsCodeViewSet import SmsCodeViewset
 from goods.views.GoodCategoryNestViewSet import GoodCategoryNestViewSet
 from goods.views.GoodCategoryViewSet import GoodCategoryViewSet
 from goods.views.GoodsApiView import GoodsListApiView
 from goods.views.GoodsModelViewSet import GoodsModelViewSet
-from apps.users.views.SmsCodeViewSet import SmsCodeViewset
+from trade.views.OrderViewset import OrderViewset
+from trade.views.ShoppingCartViewset import ShoppingCartViewset
+from user_operation.views.AddressViewset import AddressViewset
+from user_operation.views.LeavingMessageViewset import LeavingMessageViewset
+from user_operation.views.UserFavViewSet import UserFavViewSet
 from users.views.UserViewSet import UserViewSet
 
 router = DefaultRouter()
-
+"==============================apps.goods========================================"
 router.register(r'goods', GoodsModelViewSet, base_name='goods')
 
 router.register(r'good_category', GoodCategoryViewSet, base_name='good_category')
@@ -41,13 +45,23 @@ router.register(r'good_nest_category', GoodCategoryNestViewSet, base_name='good_
 
 router.register(r'code', SmsCodeViewset, base_name='code')
 
+"==============================apps.user_operation========================================"
+router.register(r'user_fav', UserFavViewSet, base_name='user_fav')
+
+router.register(r'user_leaving_message', LeavingMessageViewset, base_name='user_leaving_message')
+
+router.register(r'user_address', AddressViewset, base_name='user_address')
+"==============================apps.users========================================"
 router.register(r'users', UserViewSet, base_name='users')
 
+"==============================apps.trade========================================"
+router.register(r'shopping_cart', ShoppingCartViewset, base_name='shopping_cart')
+
+router.register(r'order', OrderViewset, base_name='order')
 urlpatterns = [
-                  # path('admin/', admin.site.urls),
 
                   path('xadmin/', xadmin.site.urls),
-                  path('schema/',  get_schema_view(title='DRF_Shop')),
+                  path('schema/', get_schema_view(title='DRF_Shop')),
 
                   # drf自带的Token
                   path('api-token-auth/', views.obtain_auth_token),
@@ -60,7 +74,6 @@ urlpatterns = [
                   path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
                   path('docs/', include_docs_urls(title='VUE_DRF_Shop')),
-
 
                   path('good_list/', GoodsListApiView.as_view(), name="good_list")
 

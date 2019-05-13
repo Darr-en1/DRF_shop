@@ -36,9 +36,9 @@ AUTH_USER_MODEL = 'users.UserProfile'
 
 
 # 自定义后端登陆验证
-AUTHENTICATION_BACKENDS = (
-    'users.views.CustomBackend.CustomBackend',
-)
+# AUTHENTICATION_BACKENDS = (
+#     'users.views.CustomBackend.CustomBackend',
+# )
 
 # Application definition
 INSTALLED_APPS = [
@@ -168,9 +168,10 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # 全局配置 可以在在单个view中设置   authentication_classes = (TokenAuthentication,)
         # 'rest_framework.authentication.TokenAuthentication',
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+
     )
 }
 JWT_AUTH = {
