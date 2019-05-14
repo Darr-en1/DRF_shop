@@ -30,6 +30,7 @@ from goods.views.GoodCategoryViewSet import GoodCategoryViewSet
 from goods.views.GoodsApiView import GoodsListApiView
 from goods.views.GoodsModelViewSet import GoodsModelViewSet
 from goods.views.HotSearchsViewset import HotSearchsViewset
+from goods.views.IndexCategoryViewset import IndexCategoryViewset
 from trade.views.OrderViewset import OrderViewset
 from trade.views.ShoppingCartViewset import ShoppingCartViewset
 from user_operation.views.AddressViewset import AddressViewset
@@ -50,6 +51,8 @@ router.register(r'code', SmsCodeViewset, base_name='code')
 router.register(r'banner', BannerViewset, base_name='banner')
 
 router.register(r'hot_search', HotSearchsViewset, base_name='hot_search')
+
+router.register(r'index_category', IndexCategoryViewset, base_name='index_category')
 
 "==============================apps.user_operation========================================"
 router.register(r'user_fav', UserFavViewSet, base_name='user_fav')
